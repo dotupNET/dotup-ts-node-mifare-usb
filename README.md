@@ -6,12 +6,26 @@
 
 ## Installation
 
-## Configuration
+Requirements:
+```shell
+apt-get install libudev-dev
+apt-get install libusb-dev
+apt-get install libusb-1.0-0
+apt-get install libusb-1.0-0-dev
+```
+
+>npm install dotup-ts-node-mifare-usb -g
 
 ## Usage
 
+List all HID devices
+>hid-list
+
+Listen to a HID device
+>hid-listner -v 65535 -p 53
+
 ## Release Notes
-### 1.0.0
+### 1.0.2
 
 Fixes/Features:
 - Initial release
