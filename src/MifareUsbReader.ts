@@ -1,7 +1,7 @@
-import { HID, devices, Device } from 'node-hid';
 import { EventEmitter } from 'events';
+import { HID } from 'node-hid';
 
-let charMap = [
+const charMap = [
   '', '', '', '',
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
   'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
