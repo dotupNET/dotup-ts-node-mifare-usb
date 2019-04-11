@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { devices, Device } from 'node-hid';
 import { MifareUsbReader, MifareUsbReaderEvents } from './MifareUsbReader';
 import enquirer from 'enquirer';
