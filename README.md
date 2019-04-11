@@ -14,7 +14,7 @@ apt-get install libusb-1.0-0
 apt-get install libusb-1.0-0-dev
 ```
 
->npm install dotup-ts-node-mifare-usb -g
+>sudo npm install -g dotup-ts-node-mifare-usb --unsafe-perm
 
 ## Usage
 
