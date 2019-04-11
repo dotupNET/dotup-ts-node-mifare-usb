@@ -1,7 +1,22 @@
 {
+  "version": "0.1.0",
+  "name": "dotup-ts-node-mifare-usb",
+  "author": {
+    "name": "Peter Ullrich",
+    "email": "dotup.software@gmail.com"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "hid-list": "dist/HidList.js",
+    "hid-listner": "dist/HidListner.js"
+  },
+  "dependencies": {
+    "node-hid": "^0.7.7",
+    "enquirer": "^2.3.0"
+  },
   "devDependencies": {
+    "@types/node-hid": "^0.7.0",
     "dotup-ts-git-wrapper": "^1.0.0",
     "gulp": "^4.0.0",
     "gulp-tslint": "^8.1.4",
@@ -38,11 +53,5 @@
     "docs": "typedoc --mode file --out docs src --exclude \"**/*+(index|.spec|.test|.e2e).ts\"",
     "gh-pages": "rimraf docs && npm run docs && gh-pages -d docs",
     "npm-publish": "npm publish"
-  },
-  "version": "0.0.0",
-  "name": "dotup-ts-node-mifare-usb",
-  "author": {
-    "name": "Peter Ullrich",
-    "email": "dotup.software@gmail.com"
   }
 }
