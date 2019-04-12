@@ -16,6 +16,10 @@ apt-get install libusb-1.0-0-dev
 
 >npm install -g dotup-ts-node-mifare-usb --unsafe-perm
 
+>sudo visudo
+
+add this line after the existing Defaults secure_path=... entry: Defaults !secure_path
+
 ## Usage
 
 List all HID devices
