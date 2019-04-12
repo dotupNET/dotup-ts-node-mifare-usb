@@ -20,6 +20,11 @@ apt-get install libusb-1.0-0-dev
 
 add this line after the existing Defaults secure_path=... entry: Defaults !secure_path
 
+>access without root: File in /etc/udev/rules.d
+SUBSYSTEM=="input", GROUP="input", MODE="0666"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="ffff", ATTRS{idProduct}=="35", MODE:="666", GROUP="plugdev"
+KERNEL=="hidraw*", ATTRS{idVendor}=="ffff", ATTRS{idProduct}=="35", MODE="0666", GROUP="plugdev"
+
 ## Usage
 
 List all HID devices
