@@ -8,26 +8,32 @@ class HidListner {
 
   async start(vid?: number, pid?: number): Promise<void> {
     const devs = devices();
-    const reader = new MifareUsbReader();
 
     if (vid === undefined || pid === undefined) {
       const choices = devs.map(device => {
         return {
           name: `${device.product} - (vid:${device.vendorId} | pid:${device.productId})`,
+          message: `${device.manufacturer} ${device.product} - (vid:${device.vendorId} | pid:${device.productId})`,
           value: device
         };
       });
 
-      const answer = await enquirer.prompt<Device>({
+      const answer = await enquirer.prompt<{ device: Device }>({
         type: 'select',
         name: 'device',
-        message: 'Choose device',
-        choices: choices
+        message: 'Choose HID device',
+        choices: choices,
+        result: (selection) => {
+          const v = choices.find(x => x.name === selection);
+          return <any>v.value;
+        }
       });
 
-      vid = answer.vendorId;
-      pid = answer.productId;
+      vid = answer.device.vendorId;
+      pid = answer.device.productId;
     }
+
+    const reader = new MifareUsbReader();
 
     reader.on(MifareUsbReaderEvents.data, code => {
       console.log(`code: ${code}`);

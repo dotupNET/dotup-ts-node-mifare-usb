@@ -25,6 +25,11 @@ Listen to a HID device
 >hid-listner -v 65535 -p 53
 
 ## Release Notes
+### 1.0.3
+
+Fixes/Features:
+- hid-listner: device selector fails
+
 ### 1.0.2
 
 Fixes/Features:

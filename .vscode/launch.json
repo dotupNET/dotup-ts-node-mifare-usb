@@ -14,13 +14,16 @@
       ],
       "skipFiles": [
         "<node_internals>/**/*.js"
-      ]
+      ],
+      "console": "integratedTerminal"
     },
     {
       "name": "Current TS File",
       "type": "node",
       "request": "launch",
-      "envFile": "${workspaceFolder}/.env",
+      "env": {
+        "NODE_ENV": "development"
+      },
       "args": [
         "${relativeFile}"
       ],
@@ -32,7 +35,8 @@
       "stopOnEntry": false,
       "sourceMaps": true,
       "cwd": "${workspaceRoot}",
-      "protocol": "inspector"
+      "protocol": "inspector",
+      "console": "integratedTerminal"
     },
     {
       "name": "Current JS File",
