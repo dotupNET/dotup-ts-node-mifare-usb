@@ -30,7 +30,7 @@ export class MifareUsbReader extends EventEmitter {
 
     this.hid.on('data', (data: Buffer) => {
 
-      const usedBytes = data.filter(v => v > 0);
+      const usedBytes = data.filter((v, i, a) => v > 0 && a.length > 0);
       const no = this.toNumber(usedBytes);
 
       // 40 = \n
@@ -55,7 +55,10 @@ export class MifareUsbReader extends EventEmitter {
     this.hid = undefined;
   }
 
-  toNumber(arr: Uint8Array) {
+  toNumber(arr: Uint8Array): number {
+    if (arr.length < 1) {
+      return undefined;
+    }
     let buffer = Buffer.from(arr);
     return buffer.readUIntBE(0, arr.length);
   }
