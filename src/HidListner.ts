@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import commander from 'commander';
-import { devices, Device } from 'node-hid';
-import { MifareUsbReader, MifareUsbReaderEvents } from './MifareUsbReader';
 import enquirer from 'enquirer';
+import { Device, devices } from 'node-hid';
+import { MifareUsbReader } from './MifareUsbReader';
 
 class HidListner {
 
@@ -35,11 +35,11 @@ class HidListner {
 
     const reader = new MifareUsbReader();
 
-    reader.on(MifareUsbReaderEvents.data, code => {
+    reader.on('data', code => {
       console.log(`code: ${code}`);
     });
 
-    reader.on(MifareUsbReaderEvents.error, error => {
+    reader.on('error', error => {
       console.error(`error: ${error}`);
     });
 

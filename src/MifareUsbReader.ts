@@ -8,13 +8,6 @@ const charMap = [
   '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\n'
 ]
 
-// moto new HID(65535, 53);
-
-export enum MifareUsbReaderEvents {
-  'error' = 'error',
-  'data' = 'data'
-}
-
 export class MifareUsbReader extends EventEmitter {
 
   private currentBuffer: number[] = [];
@@ -30,20 +23,26 @@ export class MifareUsbReader extends EventEmitter {
 
     this.hid.on('data', (data: Buffer) => {
 
-      const usedBytes = data.filter((v, i, a) => v > 0 && a.length > 0);
-      const no = this.toNumber(usedBytes);
+      try {
 
-      // 40 = \n
-      if (no === 40) {
-        this.emit(MifareUsbReaderEvents.data, this.currentBuffer.map(x => charMap[x]).join(''));
-        this.currentBuffer = [];
-      } else if (no !== undefined) {
-        this.currentBuffer.push(no);
+        const usedBytes = data.filter((v, i, a) => v > 0 && a.length > 0);
+        const no = this.toNumber(usedBytes);
+
+        // 40 = \n
+        if (no === 40) {
+          this.emit('data', this.currentBuffer.map(x => charMap[x]).join(''));
+          this.currentBuffer = [];
+        } else if (no !== undefined) {
+          this.currentBuffer.push(no);
+        }
+        
+      } catch (error) {
+        this.emit('error', error);
       }
 
     });
 
-    this.hid.on('error', e => this.emit(MifareUsbReaderEvents.error, e));
+    this.hid.on('error', e => this.emit('error', e));
   }
 
   stop() {
