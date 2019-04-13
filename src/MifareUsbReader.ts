@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import { HID } from 'node-hid';
+import { MifareUsbReaderEvents } from './MifareUsbReaderEvents';
 
 const charMap = [
   '', '', '', '',
@@ -35,7 +36,7 @@ export class MifareUsbReader extends EventEmitter {
         } else if (no !== undefined) {
           this.currentBuffer.push(no);
         }
-        
+
       } catch (error) {
         this.emit('error', error);
       }
@@ -62,4 +63,9 @@ export class MifareUsbReader extends EventEmitter {
     return buffer.readUIntBE(0, arr.length);
   }
 
+  on(event: MifareUsbReaderEvents, listener: (...args: any[]) => void): this {
+    super.on(event, listener);
+    return this;
+  }
+  
 }
