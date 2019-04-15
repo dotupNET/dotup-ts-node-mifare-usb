@@ -18,6 +18,12 @@ class HidListner {
         };
       });
 
+      if (choices.length < 1) {
+        console.log('Could not start without connected HID device.');
+        process.exit(1);
+        return;
+      }
+
       const answer = await enquirer.prompt<{ device: Device }>({
         type: 'select',
         name: 'device',

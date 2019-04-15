@@ -9,7 +9,8 @@
       "port": 5858,
       "localRoot": "${workspaceFolder}",
       "remoteRoot": "/home/pi/.nvm/versions/node/v10.15.3/lib/node_modules/dotup-ts-node-mifare-usb",
-      "timeout": 20000
+      "timeout": 20000,
+      "sourceMaps": true
     },
     {
       "type": "node",
