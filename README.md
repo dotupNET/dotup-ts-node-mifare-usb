@@ -21,13 +21,15 @@ apt-get install libusb-1.0-0-dev
 add this line after the existing Defaults secure_path=... entry:
 >Defaults !secure_path
 
-access without root: Create file `codereader` in `/etc/udev/rules.d`
+access without root: Create file `10-card.rules` in `/etc/udev/rules.d`
 Product and vendor id is hex value
->SUBSYSTEM=="input", GROUP="input", MODE="0666"
->SUBSYSTEM=="usb", ATTRS{idVendor}=="`ffff`", ATTRS{idProduct}=="`35`", MODE:="666", GROUP="plugdev"
->KERNEL=="hidraw*", ATTRS{idVendor}=="`ffff`", ATTRS{idProduct}=="`35`", MODE="0666", GROUP="plugdev"
+
+>SUBSYSTEM=="usb", ATTR{idVendor}=="ffff", ATTR{idProduct}=="35", GROUP="users" MODE="0666"
+>SUBSYSTEM=="usb", ATTR{bInterfaceClass}=="03", MODE="0666"
+>KERNEL=="hiddev*", ATTRS{idVendor}=="ffff", MODE="0666"
 
 Activate the changes:
+>sudo chmod 0666 /dev/hidraw*
 >sudo udevadm control --reload-rules
 
 ## Usage
