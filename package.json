@@ -41,16 +41,16 @@
     "commit-release": "git commit -a -m \"Release v%npm_package_version%\" && git push && git tag -a v%npm_package_version% -m \"Release v%npm_package_version%\" && git push origin --tags"
   },
   "dependencies": {
-    "node-hid": "^0.7.7",
+    "commander": "^2.20.0",
     "enquirer": "^2.3.0",
-    "commander": "^2.20.0"
+    "node-hid": "^0.7.7"
   },
   "devDependencies": {
-    "@types/node-hid": "^0.7.0",
     "@types/chai": "^4.2.10",
     "@types/eslint": "^6.1.8",
     "@types/mocha": "^7.0.2",
     "@types/node": "13.7.7",
+    "@types/node-hid": "^0.7.0",
     "@types/shelljs": "^0.8.6",
     "@types/uuid": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^2.22.0",
