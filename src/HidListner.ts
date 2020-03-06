@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import commander from 'commander';
-import enquirer from 'enquirer';
-import { Device, devices } from 'node-hid';
-import { MifareUsbReader } from './MifareUsbReader';
+import commander from "commander";
+import enquirer from "enquirer";
+import { Device, devices } from "node-hid";
+import { MifareUsbReader } from "./MifareUsbReader";
 
 class HidListner {
 
@@ -14,24 +14,24 @@ class HidListner {
         return {
           name: `${device.product} - (vid:${device.vendorId} | pid:${device.productId})`,
           message: `${device.manufacturer} ${device.product} - (vid:${device.vendorId} | pid:${device.productId})`,
-          value: device
+          value: device as any
         };
       });
 
       if (choices.length < 1) {
-        console.log('Could not start without connected HID device.');
+        console.log("Could not start without connected HID device.");
         process.exit(1);
         return;
       }
 
       const answer = await enquirer.prompt<{ device: Device }>({
-        type: 'select',
-        name: 'device',
-        message: 'Choose HID device',
+        type: "select",
+        name: "device",
+        message: "Choose HID device",
         choices: choices,
         result: (selection) => {
           const v = choices.find(x => x.name === selection);
-          return <any>v.value;
+          return v?.value as any;
         }
       });
 
@@ -41,11 +41,11 @@ class HidListner {
 
     const reader = new MifareUsbReader();
 
-    reader.on('data', code => {
+    reader.on("data", code => {
       console.log(`code: ${code}`);
     });
 
-    reader.on('error', error => {
+    reader.on("error", error => {
       console.error(`error: ${error}`);
     });
 
@@ -54,8 +54,8 @@ class HidListner {
 }
 
 const args = commander
-  .option('-v, --vid <vendorId>', 'Vendor id of the HID device')
-  .option('-p, --pid <productId>', 'Product id of the HID device')
+  .option("-v, --vid <vendorId>", "Vendor id of the HID device")
+  .option("-p, --pid <productId>", "Product id of the HID device")
   .parse(process.argv);
 
 const v = args.vid === undefined ? undefined : Number.parseInt(args.vid);
