@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.0.1",
   "name": "@dotup/node-mifare-usb",
   "scripts": {
     "build": "npm run build-ts",
