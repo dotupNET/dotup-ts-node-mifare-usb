@@ -17,6 +17,7 @@
       "es2017",
       "dom"
     ],
+    "skipLibCheck": true,
     "declaration": true,
     "sourceMap": true,
     "outDir": "dist",
